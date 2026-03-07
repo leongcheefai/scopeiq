@@ -69,7 +69,7 @@ export async function submitLead(
           project_type: state.projectType,
           calendly_link:
             process.env.NEXT_PUBLIC_CALENDLY_URL ||
-            'https://calendly.com/firsttofly/discovery',
+            'https://cal.com/leong-chee-fai-c9lgk5/30min',
         },
       }
 

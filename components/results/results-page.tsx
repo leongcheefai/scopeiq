@@ -15,7 +15,7 @@ interface ResultsPageProps {
   estimate: EstimateResult
 }
 
-const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/firsttofly/discovery'
+const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://cal.com/leong-chee-fai-c9lgk5/30min'
 
 export function ResultsPage({ formState, estimate }: ResultsPageProps) {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false)
@@ -91,12 +91,12 @@ export function ResultsPage({ formState, estimate }: ResultsPageProps) {
           <p className="text-sm text-muted-foreground">
             Powered by{' '}
             <a
-              href="https://firsttofly.com"
+              href="https://praxor.dev"
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium text-foreground hover:underline"
             >
-              Firsttofly
+              Praxor
             </a>
           </p>
         </footer>

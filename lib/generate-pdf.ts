@@ -136,7 +136,7 @@ export async function generatePDF(
   y += noteLines.length * 5 + 10
 
   // Calendly link
-  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/firsttofly/discovery'
+  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://cal.com/leong-chee-fai-c9lgk5/30min'
   addText('Book a Free Call:', margin, y, { fontSize: 10, color: '#666666' })
   doc.setTextColor(26, 26, 26)
   doc.textWithLink(calendlyUrl, margin + 30, y, { url: calendlyUrl })
@@ -145,9 +145,9 @@ export async function generatePDF(
   y = addLine(y)
 
   // Footer
-  addText('Firsttofly Sdn Bhd', margin, y, { fontSize: 9, color: '#999999' })
-  addText('hello@firsttofly.com', margin + 40, y, { fontSize: 9, color: '#999999' })
-  addText('estimate.firsttofly.com', pageWidth - margin - 40, y, { fontSize: 9, color: '#999999' })
+  addText('Praxor Sdn Bhd', margin, y, { fontSize: 9, color: '#999999' })
+  addText('enquiry@praxor.dev', margin + 40, y, { fontSize: 9, color: '#999999' })
+  addText('estimate.praxor.dev', pageWidth - margin - 40, y, { fontSize: 9, color: '#999999' })
 
   // Save the PDF
   doc.save(`ScopeIQ-Estimate-${formState.name.replace(/\s+/g, '-')}.pdf`)

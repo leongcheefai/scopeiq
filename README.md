@@ -2,7 +2,7 @@
 
 A project scope and budget estimator tool for Malaysian SME owners and startup founders. Get a project estimate in 2 minutes — no calls needed.
 
-Built by [Firsttofly](https://firsttofly.com).
+Built by [Praxor](https://praxor.dev).
 
 ## How It Works
 

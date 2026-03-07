@@ -73,12 +73,12 @@ export function LandingHero({ onStart }: LandingHeroProps) {
         <div className="max-w-6xl mx-auto text-center text-sm text-muted-foreground">
           Powered by{' '}
           <a
-            href="https://firsttofly.com"
+            href="https://praxor.dev"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-foreground hover:underline"
           >
-            Firsttofly
+            Praxor
           </a>
         </div>
       </footer>

@@ -11,7 +11,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: 'ScopeIQ | Project Scope & Budget Estimator',
   description: 'Get a project estimate in 2 minutes. No calls needed. A free tool for Malaysian SME owners and startup founders.',
-  generator: 'Firsttofly',
+  generator: 'Praxor',
   icons: {
     icon: [
       {
