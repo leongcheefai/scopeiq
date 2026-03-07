@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'ScopeIQ | Project Scope & Budget Estimator',
     description: 'Get a project estimate in 2 minutes. No calls needed. A free tool for Malaysian SME owners and startup founders.',
-    url: 'https://estimate.praxor.dev',
+    url: 'https://scope-estimate.praxor.dev',
     siteName: 'ScopeIQ',
     type: 'website',
   },

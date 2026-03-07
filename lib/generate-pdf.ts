@@ -123,31 +123,56 @@ export async function generatePDF(
   y += 5
   y = addLine(y)
 
-  // Important Note
-  addText('IMPORTANT NOTE', margin, y, { fontSize: 12, fontStyle: 'bold', color: '#666666' })
-  y += 10
-
-  doc.setFontSize(10)
-  doc.setFont('helvetica', 'normal')
-  doc.setTextColor(100, 100, 100)
+  // Important Note - warning style
+  const noteBoxPadding = 8
   const noteText = 'This is a preliminary estimate based on your inputs. Actual costs may vary based on full project scope. Book a free discovery call for a precise, itemised quote.'
-  const noteLines = doc.splitTextToSize(noteText, contentWidth)
-  doc.text(noteLines, margin, y)
-  y += noteLines.length * 5 + 10
+  doc.setFontSize(10)
+  const noteLines = doc.splitTextToSize(noteText, contentWidth - noteBoxPadding * 2)
+  const noteBoxHeight = 10 + noteLines.length * 5 + noteBoxPadding
 
-  // Calendly link
+  // Warning background
+  doc.setFillColor(255, 248, 230)
+  doc.roundedRect(margin, y - 5, contentWidth, noteBoxHeight, 2, 2, 'F')
+  // Warning left border
+  doc.setFillColor(234, 179, 8)
+  doc.rect(margin, y - 5, 3, noteBoxHeight, 'F')
+
+  addText('IMPORTANT NOTE', margin + noteBoxPadding + 2, y + 3, { fontSize: 10, fontStyle: 'bold', color: '#92400e' })
+  y += 12
+
+  doc.setFont('helvetica', 'normal')
+  doc.setTextColor(120, 83, 9)
+  doc.setFontSize(10)
+  doc.text(noteLines, margin + noteBoxPadding + 2, y)
+  y += noteLines.length * 5 + noteBoxPadding + 5
+
+  // Calendly button
   const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://cal.com/leong-chee-fai-c9lgk5/30min'
-  addText('Book a Free Call:', margin, y, { fontSize: 10, color: '#666666' })
-  doc.setTextColor(26, 26, 26)
-  doc.textWithLink(calendlyUrl, margin + 30, y, { url: calendlyUrl })
+  const btnText = 'Book a Free Call'
+  doc.setFontSize(11)
+  doc.setFont('helvetica', 'bold')
+  const btnTextWidth = doc.getTextWidth(btnText)
+  const btnPadX = 14
+  const btnWidth = btnTextWidth + btnPadX * 2
+  const btnHeight = 12
+  const btnX = (pageWidth - btnWidth) / 2
+  const btnY = y
+  doc.setFillColor(26, 26, 26)
+  doc.roundedRect(btnX, btnY, btnWidth, btnHeight, 3, 3, 'F')
+  doc.setTextColor(255, 255, 255)
+  doc.textWithLink(btnText, btnX + btnPadX, btnY + btnHeight / 2 + 2, { url: calendlyUrl })
+  y += btnHeight + 8
 
   y += 15
   y = addLine(y)
 
   // Footer
   addText('Praxor Sdn Bhd', margin, y, { fontSize: 9, color: '#999999' })
-  addText('enquiry@praxor.dev', margin + 40, y, { fontSize: 9, color: '#999999' })
-  addText('estimate.praxor.dev', pageWidth - margin - 40, y, { fontSize: 9, color: '#999999' })
+  doc.setFontSize(9)
+  const emailText = 'enquiry@praxor.dev'
+  addText(emailText, (pageWidth - doc.getTextWidth(emailText)) / 2, y, { fontSize: 9, color: '#999999' })
+  const siteText = 'scope-estimate.praxor.dev'
+  addText(siteText, pageWidth - margin - doc.getTextWidth(siteText), y, { fontSize: 9, color: '#999999' })
 
   // Save the PDF
   doc.save(`ScopeIQ-Estimate-${formState.name.replace(/\s+/g, '-')}.pdf`)
