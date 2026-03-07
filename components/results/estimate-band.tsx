@@ -1,13 +1,16 @@
 'use client'
 
 import { EstimateResult } from '@/types/wizard'
+import { CurrencyCode } from '@/lib/currency'
+import { formatBudgetRange } from '@/lib/currency'
 import { Banknote, Clock } from 'lucide-react'
 
 interface EstimateBandProps {
   estimate: EstimateResult
+  currency: CurrencyCode
 }
 
-export function EstimateBand({ estimate }: EstimateBandProps) {
+export function EstimateBand({ estimate, currency }: EstimateBandProps) {
   return (
     <div className="grid md:grid-cols-2 gap-4">
       {/* Budget Range */}
@@ -21,7 +24,7 @@ export function EstimateBand({ estimate }: EstimateBandProps) {
           </span>
         </div>
         <p className="text-2xl md:text-3xl font-bold text-foreground">
-          {estimate.budgetRange}
+          {formatBudgetRange(estimate.budgetMin, estimate.budgetMax, currency)}
         </p>
       </div>
 

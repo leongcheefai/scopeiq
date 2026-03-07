@@ -51,28 +51,32 @@ const BANDS = [
   {
     min: 0,
     max: 30,
-    budget: 'RM 8,000 – RM 18,000',
+    budgetMin: 8000,
+    budgetMax: 18000,
     timeline: '3–5 weeks',
     band: 'Starter',
   },
   {
     min: 31,
     max: 55,
-    budget: 'RM 18,000 – RM 40,000',
+    budgetMin: 18000,
+    budgetMax: 40000,
     timeline: '6–10 weeks',
     band: 'Growth',
   },
   {
     min: 56,
     max: 85,
-    budget: 'RM 40,000 – RM 75,000',
+    budgetMin: 40000,
+    budgetMax: 75000,
     timeline: '10–16 weeks',
     band: 'Scale',
   },
   {
     min: 86,
     max: 999,
-    budget: 'RM 75,000+',
+    budgetMin: 75000,
+    budgetMax: null,
     timeline: '16+ weeks',
     band: 'Enterprise',
   },
@@ -98,7 +102,8 @@ export function calculateEstimate(state: FormState): EstimateResult {
 
   return {
     score,
-    budgetRange: band.budget,
+    budgetMin: band.budgetMin,
+    budgetMax: band.budgetMax,
     timeline: band.timeline,
     band: band.band as EstimateResult['band'],
   }

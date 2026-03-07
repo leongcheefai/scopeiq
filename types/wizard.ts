@@ -22,7 +22,8 @@ export interface Step {
 
 export interface EstimateResult {
   score: number
-  budgetRange: string
+  budgetMin: number
+  budgetMax: number | null
   timeline: string
   band: 'Starter' | 'Growth' | 'Scale' | 'Enterprise'
 }

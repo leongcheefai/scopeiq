@@ -4,8 +4,10 @@ import { useState } from 'react'
 import { FormState, EstimateResult } from '@/types/wizard'
 import { getSelectedFeaturesSummary } from '@/lib/scoring'
 import { generatePDF } from '@/lib/generate-pdf'
+import { CurrencyCode, DEFAULT_CURRENCY } from '@/lib/currency'
 import { Logo } from '@/components/shared/logo'
 import { EstimateBand } from './estimate-band'
+import { CurrencySelector } from './currency-selector'
 import { FeaturesSummary } from './features-summary'
 import { CTAButtons } from './cta-buttons'
 import { AlertTriangle, RotateCcw } from 'lucide-react'
@@ -21,12 +23,13 @@ const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://cal.com/le
 
 export function ResultsPage({ formState, estimate, onStartOver }: ResultsPageProps) {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false)
+  const [currency, setCurrency] = useState<CurrencyCode>(DEFAULT_CURRENCY)
   const features = getSelectedFeaturesSummary(formState)
 
   const handleDownloadPDF = async () => {
     setIsGeneratingPDF(true)
     try {
-      await generatePDF(formState, estimate, features)
+      await generatePDF(formState, estimate, features, currency)
     } catch (error) {
       console.error('[v0] PDF generation failed:', error)
     } finally {
@@ -57,8 +60,11 @@ export function ResultsPage({ formState, estimate, onStartOver }: ResultsPagePro
             </p>
           </div>
 
-          {/* Estimate Band */}
-          <EstimateBand estimate={estimate} />
+          {/* Currency Selector + Estimate Band */}
+          <div className="flex justify-end">
+            <CurrencySelector value={currency} onChange={setCurrency} />
+          </div>
+          <EstimateBand estimate={estimate} currency={currency} />
 
           {/* Features Summary */}
           <FeaturesSummary features={features} />

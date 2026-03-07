@@ -1,10 +1,12 @@
 import { jsPDF } from 'jspdf'
 import { FormState, EstimateResult } from '@/types/wizard'
+import { CurrencyCode, CURRENCIES, formatBudgetRange } from '@/lib/currency'
 
 export async function generatePDF(
   formState: FormState,
   estimate: EstimateResult,
-  features: string[]
+  features: string[],
+  currency: CurrencyCode = 'MYR'
 ): Promise<void> {
   const doc = new jsPDF()
   const pageWidth = doc.internal.pageSize.getWidth()
@@ -99,14 +101,21 @@ export async function generatePDF(
   addText('ESTIMATED INVESTMENT', margin, y, { fontSize: 12, fontStyle: 'bold', color: '#666666' })
   y += 12
 
+  const budgetText = formatBudgetRange(estimate.budgetMin, estimate.budgetMax, currency)
   addText('Budget Range:', margin, y, { fontSize: 11, color: '#666666' })
-  addText(estimate.budgetRange, margin + 35, y, { fontSize: 14, fontStyle: 'bold' })
+  addText(budgetText, margin + 35, y, { fontSize: 14, fontStyle: 'bold' })
   y += 10
 
   addText('Timeline:', margin, y, { fontSize: 11, color: '#666666' })
   addText(estimate.timeline, margin + 35, y, { fontSize: 14, fontStyle: 'bold' })
+  y += 10
 
-  y += 15
+  if (currency !== 'MYR') {
+    addText(`Estimates shown in ${CURRENCIES[currency].label}. Rates are approximate.`, margin, y, { fontSize: 9, color: '#999999' })
+    y += 8
+  }
+
+  y += 5
   y = addLine(y)
 
   // Requirements

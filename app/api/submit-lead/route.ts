@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { formatBudgetRange } from '@/lib/currency'
 
 export async function POST(request: NextRequest) {
   try {
@@ -31,7 +32,7 @@ export async function POST(request: NextRequest) {
               'Project Type': formState.projectType,
               'Business Type': formState.businessType,
               'Design Status': formState.designStatus,
-              'Budget Range': estimate.budgetRange,
+              'Budget Range': formatBudgetRange(estimate.budgetMin, estimate.budgetMax, 'MYR'),
               Timeline: estimate.timeline,
               Score: estimate.score,
               Band: estimate.band,
@@ -77,7 +78,7 @@ export async function POST(request: NextRequest) {
           <p>Thanks for using ScopeIQ! Here's a summary of your project estimate:</p>
           <ul>
             <li><strong>Project Type:</strong> ${formState.projectType}</li>
-            <li><strong>Budget Range:</strong> ${estimate.budgetRange}</li>
+            <li><strong>Budget Range:</strong> ${formatBudgetRange(estimate.budgetMin, estimate.budgetMax, 'MYR')}</li>
             <li><strong>Timeline:</strong> ${estimate.timeline}</li>
           </ul>
           <p>Ready to discuss your project?</p>
