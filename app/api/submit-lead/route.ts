@@ -7,9 +7,12 @@ export async function POST(request: NextRequest) {
 
     const results: { airtable?: string; email?: string } = {}
 
+    console.log('submit-lead called, formState:', JSON.stringify(formState))
+
     // Save to Airtable
     const airtableApiKey = process.env.AIRTABLE_API_KEY
     const airtableBaseId = process.env.AIRTABLE_BASE_ID
+    console.log('Airtable config:', { hasKey: !!airtableApiKey, hasBaseId: !!airtableBaseId })
 
     if (airtableApiKey && airtableBaseId) {
       const response = await fetch(
@@ -32,7 +35,7 @@ export async function POST(request: NextRequest) {
               Timeline: estimate.timeline,
               Score: estimate.score,
               Band: estimate.band,
-              'Features Selected': formState.features.join(', '),
+              'Features Selected': formState.features,
               'User Roles': formState.userRoles,
               'Data Complexity': formState.dataComplexity,
               Maintenance: formState.maintenance,
@@ -45,8 +48,14 @@ export async function POST(request: NextRequest) {
       )
 
       if (!response.ok) {
+        const errorBody = await response.text()
+        console.error('Airtable error:', response.status, errorBody)
         results.airtable = `Failed: ${response.status}`
+      } else {
+        console.log('Airtable lead saved successfully')
       }
+    } else {
+      console.warn('Airtable not configured — missing AIRTABLE_API_KEY or AIRTABLE_BASE_ID')
     }
 
     // Send confirmation email via Resend

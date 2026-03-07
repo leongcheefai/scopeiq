@@ -53,28 +53,28 @@ const BANDS = [
     max: 30,
     budget: 'RM 8,000 – RM 18,000',
     timeline: '3–5 weeks',
-    band: 'starter',
+    band: 'Starter',
   },
   {
     min: 31,
     max: 55,
     budget: 'RM 18,000 – RM 40,000',
     timeline: '6–10 weeks',
-    band: 'growth',
+    band: 'Growth',
   },
   {
     min: 56,
     max: 85,
     budget: 'RM 40,000 – RM 75,000',
     timeline: '10–16 weeks',
-    band: 'scale',
+    band: 'Scale',
   },
   {
     min: 86,
     max: 999,
     budget: 'RM 75,000+',
     timeline: '16+ weeks',
-    band: 'enterprise',
+    band: 'Enterprise',
   },
 ]
 

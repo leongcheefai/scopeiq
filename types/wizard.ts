@@ -24,7 +24,7 @@ export interface EstimateResult {
   score: number
   budgetRange: string
   timeline: string
-  band: 'starter' | 'growth' | 'scale' | 'enterprise'
+  band: 'Starter' | 'Growth' | 'Scale' | 'Enterprise'
 }
 
 export const initialFormState: FormState = {
