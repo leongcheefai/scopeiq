@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Resend } from 'resend'
 
 export async function POST(request: NextRequest) {
   try {
@@ -48,39 +49,37 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Send confirmation email via EmailJS
-    const emailjsServiceId = process.env.EMAILJS_SERVICE_ID
-    const emailjsTemplateId = process.env.EMAILJS_TEMPLATE_ID
-    const emailjsPublicKey = process.env.EMAILJS_PUBLIC_KEY
+    // Send confirmation email via Resend
+    const resendApiKey = process.env.RESEND_API_KEY
+    const resendFromEmail = process.env.RESEND_FROM_EMAIL
 
-    if (emailjsServiceId && emailjsTemplateId && emailjsPublicKey) {
-      const emailResponse = await fetch(
-        'https://api.emailjs.com/api/v1.0/email/send',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            service_id: emailjsServiceId,
-            template_id: emailjsTemplateId,
-            user_id: emailjsPublicKey,
-            template_params: {
-              to_name: formState.name,
-              to_email: formState.email,
-              budget_range: estimate.budgetRange,
-              timeline: estimate.timeline,
-              project_type: formState.projectType,
-              calendly_link:
-                process.env.NEXT_PUBLIC_CALENDLY_URL ||
-                'https://cal.com/leong-chee-fai-c9lgk5/30min',
-            },
-          }),
-        }
-      )
+    if (resendApiKey && resendFromEmail) {
+      const resend = new Resend(resendApiKey)
+      const calendlyLink =
+        process.env.NEXT_PUBLIC_CALENDLY_URL ||
+        'https://cal.com/leong-chee-fai-c9lgk5/30min'
 
-      if (!emailResponse.ok) {
-        results.email = `Failed: ${emailResponse.status}`
+      const { error } = await resend.emails.send({
+        from: resendFromEmail,
+        to: formState.email,
+        subject: `Your ScopeIQ Estimate — ${estimate.band} Plan`,
+        html: `
+          <h2>Hi ${formState.name},</h2>
+          <p>Thanks for using ScopeIQ! Here's a summary of your project estimate:</p>
+          <ul>
+            <li><strong>Project Type:</strong> ${formState.projectType}</li>
+            <li><strong>Budget Range:</strong> ${estimate.budgetRange}</li>
+            <li><strong>Timeline:</strong> ${estimate.timeline}</li>
+          </ul>
+          <p>Ready to discuss your project?</p>
+          <p><a href="${calendlyLink}" style="display:inline-block;padding:12px 24px;background:#2563eb;color:#fff;text-decoration:none;border-radius:6px;">Book a Free Consultation</a></p>
+          <br/>
+          <p>— The Praxor Team</p>
+        `,
+      })
+
+      if (error) {
+        results.email = `Failed: ${error.message}`
       }
     }
 

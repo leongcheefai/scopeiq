@@ -28,7 +28,7 @@ ScopeIQ is a single-page project scope & budget estimator for Malaysian SMEs, bu
 
 **External integrations** (all optional, controlled via env vars):
 - **Airtable** (`NEXT_PUBLIC_AIRTABLE_API_KEY`, `NEXT_PUBLIC_AIRTABLE_BASE_ID`) — Stores leads on wizard completion
-- **EmailJS** (`NEXT_PUBLIC_EMAILJS_SERVICE_ID`, `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`, `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`) — Sends confirmation emails
+- **Resend** (`RESEND_API_KEY`, `RESEND_FROM_EMAIL`) — Sends confirmation emails
 - **Calendly/Cal.com** (`NEXT_PUBLIC_CALENDLY_URL`) — Booking link on results page
 - **Vercel Analytics** — Included in root layout
 
