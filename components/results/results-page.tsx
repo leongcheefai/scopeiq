@@ -8,16 +8,18 @@ import { Logo } from '@/components/shared/logo'
 import { EstimateBand } from './estimate-band'
 import { FeaturesSummary } from './features-summary'
 import { CTAButtons } from './cta-buttons'
-import { AlertTriangle } from 'lucide-react'
+import { AlertTriangle, RotateCcw } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 interface ResultsPageProps {
   formState: FormState
   estimate: EstimateResult
+  onStartOver?: () => void
 }
 
 const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://cal.com/leong-chee-fai-c9lgk5/30min'
 
-export function ResultsPage({ formState, estimate }: ResultsPageProps) {
+export function ResultsPage({ formState, estimate, onStartOver }: ResultsPageProps) {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false)
   const features = getSelectedFeaturesSummary(formState)
 
@@ -62,14 +64,14 @@ export function ResultsPage({ formState, estimate }: ResultsPageProps) {
           <FeaturesSummary features={features} />
 
           {/* Disclaimer */}
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+          <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-xl p-4">
             <div className="flex gap-3">
-              <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+              <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm text-amber-800 font-medium mb-1">
+                <p className="text-sm text-amber-800 dark:text-amber-300 font-medium mb-1">
                   Important Note
                 </p>
-                <p className="text-sm text-amber-700">
+                <p className="text-sm text-amber-700 dark:text-amber-400">
                   This is a ballpark estimate based on your inputs. Actual costs
                   may vary based on full project scope. A 30-minute discovery
                   call gives you a precise, commitment-free quote.
@@ -84,6 +86,20 @@ export function ResultsPage({ formState, estimate }: ResultsPageProps) {
             calendlyUrl={CALENDLY_URL}
             isGeneratingPDF={isGeneratingPDF}
           />
+
+          {/* Start Over */}
+          {onStartOver && (
+            <div className="flex justify-center">
+              <Button
+                variant="ghost"
+                onClick={onStartOver}
+                className="text-muted-foreground"
+              >
+                <RotateCcw className="w-4 h-4 mr-2" />
+                Start Over
+              </Button>
+            </div>
+          )}
         </div>
 
         {/* Footer */}

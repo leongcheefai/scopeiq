@@ -13,8 +13,8 @@ export function EstimateBand({ estimate }: EstimateBandProps) {
       {/* Budget Range */}
       <div className="bg-secondary/50 rounded-2xl p-6">
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center">
-            <Banknote className="w-5 h-5 text-white" />
+          <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+            <Banknote className="w-5 h-5 text-primary-foreground" />
           </div>
           <span className="text-sm font-medium text-muted-foreground">
             Budget Range
@@ -28,8 +28,8 @@ export function EstimateBand({ estimate }: EstimateBandProps) {
       {/* Timeline */}
       <div className="bg-secondary/50 rounded-2xl p-6">
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center">
-            <Clock className="w-5 h-5 text-white" />
+          <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+            <Clock className="w-5 h-5 text-primary-foreground" />
           </div>
           <span className="text-sm font-medium text-muted-foreground">
             Estimated Timeline

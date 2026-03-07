@@ -18,8 +18,8 @@ export function FeaturesSummary({ features }: FeaturesSummaryProps) {
             key={index}
             className="flex items-center gap-3 text-foreground"
           >
-            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#1a1a1a] flex items-center justify-center">
-              <Check className="w-3 h-3 text-white" />
+            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+              <Check className="w-3 h-3 text-primary-foreground" />
             </div>
             <span className="text-sm">{feature}</span>
           </div>

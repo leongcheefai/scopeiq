@@ -58,14 +58,25 @@ export function WizardShell({ onComplete }: WizardShellProps) {
   }, [])
 
   const handleSubmit = useCallback(async () => {
+    // Validate all required steps are filled
+    for (const step of steps) {
+      if (step.type === 'form') continue
+      const value = formState[step.key]
+      if (step.type === 'multi') {
+        if ((value as string[]).length === 0) return
+      } else {
+        if (!value) return
+      }
+    }
+
     setIsSubmitting(true)
-    
+
     // Calculate estimate
     const estimate = calculateEstimate(formState)
-    
+
     // Small delay for UX
     await new Promise((resolve) => setTimeout(resolve, 500))
-    
+
     setIsSubmitting(false)
     onComplete(formState, estimate)
   }, [formState, onComplete])

@@ -18,6 +18,12 @@ export default function Home() {
     setAppState('wizard')
   }
 
+  const handleStartOver = () => {
+    setFormState(null)
+    setEstimate(null)
+    setAppState('landing')
+  }
+
   const handleWizardComplete = async (
     completedFormState: FormState,
     completedEstimate: EstimateResult
@@ -26,8 +32,10 @@ export default function Home() {
     setEstimate(completedEstimate)
     setAppState('results')
 
-    // Submit lead in the background
-    await submitLead(completedFormState, completedEstimate)
+    // Submit lead in the background (non-blocking)
+    submitLead(completedFormState, completedEstimate).catch(() => {
+      // Silently handled — lead submission is best-effort
+    })
   }
 
   if (appState === 'landing') {
@@ -39,7 +47,7 @@ export default function Home() {
   }
 
   if (appState === 'results' && formState && estimate) {
-    return <ResultsPage formState={formState} estimate={estimate} />
+    return <ResultsPage formState={formState} estimate={estimate} onStartOver={handleStartOver} />
   }
 
   return null

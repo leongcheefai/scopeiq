@@ -36,7 +36,7 @@ export function CTAButtons({
       </Button>
       <Button
         asChild
-        className="h-12 px-6 text-base font-semibold bg-[#1a1a1a] hover:bg-[#1a1a1a]/90 text-white"
+        className="h-12 px-6 text-base font-semibold bg-primary text-primary-foreground"
       >
         <a href={calendlyUrl} target="_blank" rel="noopener noreferrer">
           <Calendar className="w-4 h-4 mr-2" />

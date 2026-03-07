@@ -12,6 +12,19 @@ export const metadata: Metadata = {
   title: 'ScopeIQ | Project Scope & Budget Estimator',
   description: 'Get a project estimate in 2 minutes. No calls needed. A free tool for Malaysian SME owners and startup founders.',
   generator: 'Praxor',
+  metadataBase: new URL('https://estimate.praxor.dev'),
+  openGraph: {
+    title: 'ScopeIQ | Project Scope & Budget Estimator',
+    description: 'Get a project estimate in 2 minutes. No calls needed. A free tool for Malaysian SME owners and startup founders.',
+    url: 'https://estimate.praxor.dev',
+    siteName: 'ScopeIQ',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ScopeIQ | Project Scope & Budget Estimator',
+    description: 'Get a project estimate in 2 minutes. No calls needed.',
+  },
   icons: {
     icon: [
       {

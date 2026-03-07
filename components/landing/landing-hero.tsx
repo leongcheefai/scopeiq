@@ -31,7 +31,7 @@ export function LandingHero({ onStart }: LandingHeroProps) {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 text-balance leading-tight">
             Get a project estimate
             <br />
-            <span className="text-[#1a1a1a]/70">in 2 minutes</span>
+            <span className="text-foreground/70">in 2 minutes</span>
           </h1>
 
           {/* Subheadline */}
@@ -44,7 +44,7 @@ export function LandingHero({ onStart }: LandingHeroProps) {
           <Button
             onClick={onStart}
             size="lg"
-            className="h-14 px-8 text-lg font-semibold bg-[#1a1a1a] hover:bg-[#1a1a1a]/90 text-white shadow-lg hover:shadow-xl transition-all"
+            className="h-14 px-8 text-lg font-semibold bg-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all"
           >
             Start Estimating
             <ArrowRight className="w-5 h-5 ml-2" />

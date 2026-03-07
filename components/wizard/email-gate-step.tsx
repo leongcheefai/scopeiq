@@ -44,7 +44,7 @@ export function EmailGateStep({
   return (
     <div className="space-y-6">
       <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 text-amber-700 rounded-full text-sm font-medium mb-4">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 rounded-full text-sm font-medium mb-4">
           <Sparkles className="w-4 h-4" />
           You&apos;re almost there
         </div>
@@ -109,7 +109,7 @@ export function EmailGateStep({
         <Button
           onClick={handleSubmit}
           disabled={!isValid || isSubmitting}
-          className="w-full h-12 text-base font-semibold bg-[#1a1a1a] hover:bg-[#1a1a1a]/90 text-white"
+          className="w-full h-12 text-base font-semibold bg-primary text-primary-foreground"
         >
           {isSubmitting ? (
             <span className="flex items-center gap-2">

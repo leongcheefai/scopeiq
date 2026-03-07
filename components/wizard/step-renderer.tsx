@@ -67,7 +67,7 @@ export function StepRenderer({
           <Button
             onClick={onContinue}
             disabled={selectedValues.length === 0}
-            className="h-11 px-6 text-base font-semibold bg-[#1a1a1a] hover:bg-[#1a1a1a]/90 text-white"
+            className="h-11 px-6 text-base font-semibold bg-primary text-primary-foreground"
           >
             Continue
             <ArrowRight className="w-4 h-4 ml-2" />
