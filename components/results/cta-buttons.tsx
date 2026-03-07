@@ -15,7 +15,7 @@ export function CTAButtons({
   isGeneratingPDF,
 }: CTAButtonsProps) {
   return (
-    <div className="flex flex-col sm:flex-row gap-3">
+    <div className="flex flex-col sm:flex-row gap-3 justify-center">
       <Button
         onClick={onDownloadPDF}
         disabled={isGeneratingPDF}
